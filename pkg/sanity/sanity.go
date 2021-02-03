@@ -197,6 +197,10 @@ func NewTestConfig() TestConfig {
 
 		DialOptions:           []grpc.DialOption{grpc.WithInsecure()},
 		ControllerDialOptions: []grpc.DialOption{grpc.WithInsecure()},
+
+		TestVolumeParameters: map[string]string{
+			"infraStorageClassName": "standard",
+		},
 	}
 }
 
@@ -440,7 +444,7 @@ func PseudoUUID() string {
 		// Shouldn't happen?!
 		return ""
 	}
-	return fmt.Sprintf("%08X-%08X", b[0:4], b[4:8])
+	return fmt.Sprintf("%08x-%08x", b[0:4], b[4:8])
 }
 
 // UniqueString returns a unique string by appending a random

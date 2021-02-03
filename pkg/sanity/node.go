@@ -19,6 +19,7 @@ package sanity
 import (
 	"context"
 	"fmt"
+	"time"
 
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
@@ -121,6 +122,7 @@ func runControllerTest(sc *TestContext, r *Resources, controllerPublishSupported
 		)
 		Expect(err).NotTo(HaveOccurred())
 		Expect(conpubvol).NotTo(BeNil())
+		time.Sleep(2 * time.Second)
 	}
 	// NodeStageVolume
 	if nodeStageSupported {
@@ -646,6 +648,7 @@ var _ = DescribeSanity("Node Service", func(sc *TestContext) {
 			Expect(nid.GetNodeId()).NotTo(BeEmpty())
 
 			conpubvol := controllerPublishVolume(name, vol, nid)
+			time.Sleep(2 * time.Second)
 
 			// NodeStageVolume
 			_ = nodeStageVolume(name, vol, conpubvol)
@@ -758,6 +761,7 @@ var _ = DescribeSanity("Node Service", func(sc *TestContext) {
 			Expect(nid.GetNodeId()).NotTo(BeEmpty())
 
 			conpubvol := controllerPublishVolume(name, vol, nid)
+			time.Sleep(2 * time.Second)
 
 			// NodeStageVolume
 			_ = nodeStageVolume(name, vol, conpubvol)

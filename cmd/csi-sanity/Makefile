@@ -17,14 +17,15 @@ else
 endif
 endif
 
-LDFLAGS :=-ldflags "-w -X github.com/kubernetes-csi/csi-test/cmd/csi-sanity.VERSION=$(VERSION) -extldflags '-z relro -z now'"
+LDFLAGS :=-ldflags "-X github.com/kubernetes-csi/csi-test/cmd/csi-sanity.VERSION=$(VERSION) -extldflags '-z relro -z now'"
+GCFLAGS :=-gcflags "all=-N -l"
 PACKAGE :=$(DIR)/dist/$(APP_NAME)-$(RELEASEVER).$(GOOS).$(ARCH).tar.gz
 
 all: $(APP_NAME)
 
 .PHONY: $(APP_NAME)
 $(APP_NAME): Makefile
-	go build $(LDFLAGS) -o $(APP_NAME)
+	go build $(LDFLAGS) $(GCFLAGS) -o $(APP_NAME)
 
 install: $(APP_NAME)
 	cp $(APP_NAME) $(GOPATH)/bin

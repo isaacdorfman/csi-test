@@ -1035,6 +1035,7 @@ var _ = DescribeSanity("Controller Service [Controller Server]", func(sc *TestCo
 				VolumeCapability: TestVolumeCapabilityWithAccessType(sc, csi.VolumeCapability_AccessMode_SINGLE_NODE_WRITER),
 				Readonly:         false,
 				Secrets:          sc.Secrets.ControllerPublishVolumeSecret,
+				VolumeContext: vol.Volume.VolumeContext,
 			}
 
 			conpubvol := r.MustControllerPublishVolume(context.Background(), pubReq)
@@ -1680,6 +1681,7 @@ func VolumeLifecycle(r *Resources, sc *TestContext, count int) {
 				VolumeCapability: TestVolumeCapabilityWithAccessType(sc, csi.VolumeCapability_AccessMode_SINGLE_NODE_WRITER),
 				Readonly:         false,
 				Secrets:          sc.Secrets.ControllerPublishVolumeSecret,
+				VolumeContext: vol.Volume.VolumeContext,
 			},
 		)
 	}
