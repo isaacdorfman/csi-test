@@ -122,7 +122,7 @@ func runControllerTest(sc *TestContext, r *Resources, controllerPublishSupported
 		)
 		Expect(err).NotTo(HaveOccurred())
 		Expect(conpubvol).NotTo(BeNil())
-		time.Sleep(2 * time.Second)
+		time.Sleep(30 * time.Second)
 	}
 	// NodeStageVolume
 	if nodeStageSupported {
@@ -786,14 +786,14 @@ var _ = DescribeSanity("Node Service", func(sc *TestContext) {
 
 	// CSI spec poses no specific requirements for the cluster/storage setups that a SP MUST support. To perform
 	// meaningful checks the following test assumes that topology-aware provisioning on a single node setup is supported
-	It("should work", func() {
+	PIt("should work", func() {
 		if !providesControllerService {
 			Skip("Controller Service not provided: CreateVolume not supported")
 		}
 		By("runControllerTest")
 		runControllerTest(sc, r, controllerPublishSupported, nodeStageSupported, nodeVolumeStatsSupported, 1)
 	})
-	It("should be idempotent", func() {
+	PIt("should be idempotent", func() {
 		if !providesControllerService {
 			Skip("Controller Service not provided: CreateVolume not supported")
 		}
